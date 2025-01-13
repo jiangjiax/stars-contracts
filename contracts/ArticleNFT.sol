@@ -15,6 +15,8 @@ error ExceedsMaxSupply();
 error AlreadyMinted();
 error TokenNotExist();
 error NoBalanceToWithdraw();
+error NotTokenOwner();
+error NotAuthorized();
 
 contract ArticleNFT is ERC721, Ownable, IERC2981 {
     uint96 private immutable PLATFORM_FEE = 1000; // 10%
@@ -176,5 +178,14 @@ contract ArticleNFT is ERC721, Ownable, IERC2981 {
         uint256 balance = address(this).balance;
         if(balance == 0) revert NoBalanceToWithdraw();
         payable(owner()).transfer(balance);
+    }
+
+    /**
+     * @dev 销毁 NFT
+     * @param tokenId 要销毁的 NFT ID
+     */
+    function burnArticle(uint256 tokenId) public {
+        if(_ownerOf(tokenId) != msg.sender) revert NotTokenOwner();
+        _burn(tokenId);
     }
 } 

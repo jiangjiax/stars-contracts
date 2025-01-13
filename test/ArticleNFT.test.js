@@ -217,4 +217,33 @@ describe("ArticleNFT", function () {
       expect(finalAuthorBalance - initialAuthorBalance).to.equal(authorFee);
     });
   });
+
+  describe("NFT Operations", function () {
+    it("Should burn NFT correctly", async function () {
+      // 先铸造一个 NFT
+      await articleNFT.connect(reader1).mintArticle(
+        author.address,
+        articleData.name,
+        articleData.contentHash,
+        articleData.arweaveId,
+        articleData.version,
+        articleData.price,
+        articleData.maxSupply,
+        articleData.royaltyFee,
+        articleData.onePerAddress,
+        { value: articleData.price }
+      );
+
+      const articleId = ethers.solidityPackedKeccak256(
+        ["string", "string"],
+        [articleData.contentHash, articleData.arweaveId]
+      );
+
+      // 销毁 NFT
+      await articleNFT.connect(reader1).burnArticle(articleId);
+
+      // 验证 NFT 已被销毁
+      await expect(articleNFT.ownerOf(articleId)).to.be.revertedWith("ERC721: invalid token ID");
+    });
+  });
 }); 
