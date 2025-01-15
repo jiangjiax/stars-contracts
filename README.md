@@ -12,10 +12,10 @@ This is the NFT smart contract for the Stars project, which enables authors to t
 
 ## Deployed Contracts
 
-| Network | Contract Address |
-|---------|-----------------|
-| Ethereum Sepolia | [0x760410d585110e149233919357E7C866bb51A841](https://sepolia.etherscan.io/address/0x760410d585110e149233919357E7C866bb51A841) |
-| Telos Testnet | [0x4AB01dd5Fe790F01CF8814610e2388550064B6ed](https://testnet.teloscan.io/address/0x4AB01dd5Fe790F01CF8814610e2388550064B6ed) |
+| Network | Contract Address | Chain ID |
+|---------|-----------------|---------|
+| Ethereum Sepolia | [0x5c83f2287833F567b1D80D7B981084eb5CaeF445](https://sepolia.etherscan.io/address/0x5c83f2287833F567b1D80D7B981084eb5CaeF445) | 11155111 |
+| Telos Testnet | [0x903e48Ca585dBF4dFeb74f2864501feB6f0dF369](https://testnet.teloscan.io/address/0x903e48Ca585dBF4dFeb74f2864501feB6f0dF369) | 41 |
 
 ## Development
 
@@ -65,6 +65,16 @@ npx hardhat run scripts/deploy.js --network sepolia
 npx hardhat run scripts/deploy.js --network telosTestnet
 ```
 
+### Deploy to Mainnet
+
+#### Telos Mainnet
+1. Ensure you have TLOS in your wallet for deployment
+
+2. Deploy contract:
+```shell
+npx hardhat run scripts/deploy.js --network telosMainnet
+```
+
 ## Contract Verification
 
 ### Sepolia
@@ -75,6 +85,23 @@ npx hardhat verify --network sepolia <CONTRACT_ADDRESS>
 ### Telos Testnet
 Contract verification can be done on the Telos testnet explorer:
 https://testnet.teloscan.io/
+
+### Telos Mainnet
+1. Get the flattened contract:
+```shell
+npx hardhat flatten contracts/ArticleNFT.sol > ArticleNFTFlat.sol
+```
+
+2. Go to Telos Explorer:
+   - Visit https://www.teloscan.io/
+   - Find your contract
+   - Click "Verify & Publish"
+   - Select Solidity Single File
+   - Compiler Version: v0.8.28
+   - Optimization: Yes (200 runs)
+   - License: MIT
+   - Paste the flattened contract code
+   - Submit for verification
 
 ## Testing Steps
 

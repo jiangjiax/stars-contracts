@@ -4,14 +4,15 @@ async function main() {
   console.log("Deploying ArticleNFT contract...");
   
   const ArticleNFT = await hre.ethers.getContractFactory("ArticleNFT");
-  const articleNFT = await ArticleNFT.deploy();
+  const articleNFT = await ArticleNFT.deploy({
+    gasLimit: 3000000
+  });
 
   await articleNFT.waitForDeployment();
 
   const address = await articleNFT.getAddress();
   console.log("ArticleNFT deployed to:", address);
   
-  // 获取当前网络信息
   const network = await hre.ethers.provider.getNetwork();
   console.log("Network:", {
     name: network.name,

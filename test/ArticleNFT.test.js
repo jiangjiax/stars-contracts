@@ -129,7 +129,8 @@ describe("ArticleNFT", function () {
 
   describe("Royalties", function () {
     it("Should return correct royalty info", async function () {
-      await articleNFT.connect(reader1).mintArticle(
+      // 先铸造 NFT
+      const tx = await articleNFT.connect(reader1).mintArticle(
         author.address,
         articleData.name,
         articleData.contentHash,
@@ -141,11 +142,14 @@ describe("ArticleNFT", function () {
         articleData.onePerAddress,
         { value: articleData.price }
       );
+      
+      // 等待交易完成
+      await tx.wait();
 
       const salePrice = ethers.parseEther("1.0");
       const articleId = ethers.solidityPackedKeccak256(
-        ["string", "string"],
-        [articleData.contentHash, articleData.arweaveId]
+        ["string", "address"],  // 使用 string 和 address 类型
+        [articleData.contentHash, author.address]
       );
 
       const [receiver, royaltyAmount] = await articleNFT.royaltyInfo(articleId, salePrice);
@@ -171,8 +175,8 @@ describe("ArticleNFT", function () {
       );
 
       const articleId = ethers.solidityPackedKeccak256(
-        ["string", "string"],
-        [articleData.contentHash, articleData.arweaveId]
+        ["string", "address"],  // 使用 string 和 address 类型
+        [articleData.contentHash, author.address]
       );
 
       const article = await articleNFT.getArticle(articleId);
@@ -235,8 +239,8 @@ describe("ArticleNFT", function () {
       );
 
       const articleId = ethers.solidityPackedKeccak256(
-        ["string", "string"],
-        [articleData.contentHash, articleData.arweaveId]
+        ["string", "address"],  // 使用 string 和 address 类型
+        [articleData.contentHash, author.address]
       );
 
       // 销毁 NFT
