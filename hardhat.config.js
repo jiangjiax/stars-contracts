@@ -41,6 +41,11 @@ module.exports = {
       url: "https://mainnet.telos.net/evm",
       accounts: [process.env.PRIVATE_KEY],
       chainId: 40
+    },
+    eduTestnet: {
+      url: "https://open-campus-codex-sepolia.drpc.org",
+      accounts: [process.env.PRIVATE_KEY_TEST],
+      chainId: 656476,
     }
   }
 };
