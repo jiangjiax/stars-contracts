@@ -4,9 +4,7 @@ async function main() {
   console.log("Deploying ArticleNFT contract...");
   
   const ArticleNFT = await hre.ethers.getContractFactory("ArticleNFT");
-  const articleNFT = await ArticleNFT.deploy({
-    gasLimit: 3000000
-  });
+  const articleNFT = await ArticleNFT.deploy();
 
   await articleNFT.waitForDeployment();
 

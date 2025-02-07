@@ -16,6 +16,7 @@ This is the NFT smart contract for the Stars project, which enables authors to t
 |---------|-----------------|---------|
 | Ethereum Sepolia | [0x5c83f2287833F567b1D80D7B981084eb5CaeF445](https://sepolia.etherscan.io/address/0x5c83f2287833F567b1D80D7B981084eb5CaeF445) | 11155111 |
 | Telos Testnet | [0x903e48Ca585dBF4dFeb74f2864501feB6f0dF369](https://testnet.teloscan.io/address/0x903e48Ca585dBF4dFeb74f2864501feB6f0dF369) | 41 |
+| Edu Testnet | [0xcA3Dbe8eF976e606B8c96052aaC22763aDeAEE0A](https://edu-chain-testnet.blockscout.com/address/0xcA3Dbe8eF976e606B8c96052aaC22763aDeAEE0A) | 656476 |
 
 ## Development
 

@@ -44,7 +44,7 @@ module.exports = {
     },
     eduTestnet: {
       url: "https://open-campus-codex-sepolia.drpc.org",
-      accounts: [process.env.PRIVATE_KEY_TEST],
+      accounts: [process.env.PRIVATE_KEY],
       chainId: 656476,
     }
   }
